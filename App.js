@@ -1,22 +1,38 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import NavBar from './src/components/Navbar'
-import Form from './src/components/Form'
+import React, {useState} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import NavBar from './src/components/Navbar';
+import Form from './src/components/Form';
+import News from './src/components/Form/News';
 
 export default function App() {
-  return (
-    <View>
-        <NavBar title="This is NavBar!!!"/>
-      <View style={styles.container}>
-          <Form />
-      </View>
-    </View>
-  );
+
+    const [news, setNews] = useState([]);
+
+    const addNews = (title) => {
+        setNews(prev => [...prev,
+            {
+                id: new Date().toString()+Math.random(),
+                title
+            }])
+    };
+
+
+    return (
+        <View>
+            <NavBar title="This is NavBar!!!"/>
+            <View style={styles.container}>
+                <Form onSumbit={addNews}/>
+                <View>
+                    { news.map(news=> <News news={news} key={news.id} />) }
+                </View>
+            </View>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal:25,
-      paddingVertical:20
-  },
+    container: {
+        paddingHorizontal: 25,
+        paddingVertical: 20
+    },
 });
