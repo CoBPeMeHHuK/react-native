@@ -10,7 +10,7 @@ export default class Form extends Component{
         const [value,setValue] = useState('');
 
         const pressHandler = ()=>{
-            this.props.onSubmit('set News');
+            this.props.onSubmit(value);
         };
         return(
             <View style={styles.form}>
