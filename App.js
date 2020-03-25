@@ -21,7 +21,7 @@ export default function App() {
         <View>
             <NavBar title="This is NavBar!!!"/>
             <View style={styles.container}>
-                <Form onSumbit={addNews}/>
+                <Form onSubmit={addNews}/>
                 <View>
                     { news.map(news=> <News news={news} key={news.id} />) }
                 </View>
