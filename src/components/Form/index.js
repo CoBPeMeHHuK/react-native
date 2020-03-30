@@ -1,25 +1,26 @@
-import React,{Component,useState} from 'react';
-import {View,StyleSheet,TextInput,Button} from 'react-native'
+import React,{useState} from 'react';
+import {View,StyleSheet,TextInput,Button,Alert} from 'react-native';
+import {THEME} from '../../theme';
 
-export default class Form extends Component{
-    constructor(props) {
-        super(props);
-    }
-    render(){
+export default function Form ({onSubmit}){
 
-        const [value,setValue] = useState('');
+    const [title,setTitle] = useState('');
 
-        const pressHandler = ()=>{
-            this.props.onSubmit(value);
-        };
-        return(
-            <View style={styles.form}>
-                <TextInput style={styles.input} onChangeText={setValue} value={value} placeholder="Введите название новости"/>
-                <Button style={styles.button} title="Button" onPress={pressHandler} />
-            </View>
-        );
-    }
+    const pressHandler = ()=>{
+        if(title.trim()){
+            onSubmit(title);
+            setTitle('');
 
+        }else{
+            Alert.alert('Название статьи не может быть пустым');
+        }
+    };
+    return(
+        <View style={styles.form}>
+            <TextInput style={styles.input} onChangeText={(event)=>setTitle(event)} value={title}/>
+            <Button style={styles.button} title="Добавить" onPress={pressHandler} />
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
     input:{
         width:'70%',
         borderStyle:'solid',
-        borderBottomColor:'#3949ab',
+        borderBottomColor:THEME.MAIN_COLOR,
         borderBottomWidth:2,
         height: '70%',
         padding:10

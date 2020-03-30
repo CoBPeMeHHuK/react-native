@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
-import {View,Text,StyleSheet} from 'react-native'
+import {View,Text,StyleSheet} from 'react-native';
+import {THEME} from '../../theme';
 
 export default class NavBar extends Component{
     constructor(props) {
@@ -17,7 +18,7 @@ export default class NavBar extends Component{
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor:'#3949ab',
+        backgroundColor:THEME.MAIN_COLOR,
         width:'100%',
         justifyContent:'flex-end',
         alignItems:'center',
